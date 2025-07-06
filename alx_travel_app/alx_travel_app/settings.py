@@ -80,18 +80,14 @@ WSGI_APPLICATION = 'alx_travel_app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'alx_travel_db',
-        'USER': 'root',
-        'PASSWORD': 'DB_PASSWORD',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -170,16 +166,24 @@ import os
 import environ
 
 # Initialize environment variables
-env = environ.Env(
-    DEBUG=(bool, False)
-)
-environ.Env.read_env()  # reads the .env file
+env = environ.Env( DEBUG=(bool, False))  # Default DEBUG to False if not set
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))  # Reads the .env file
+# Load environment variables from .env file
+
 
 # Database configuration using environment variables
-DEBUG = env('DEBUG') # Set to True for development, False for production
-#SECRET_KEY = env('SECRET_KEY') # Ensure you set this in your .env file
+DEBUG = env('DEBUG', default=True)  # Default DEBUG to True if not set
+# Ensure you set this in your .env file 
+SECRET_KEY = env('SECRET_KEY') # Default secret key if not set in .env   
+# Ensure you set these in your .env file
 
-"""
+# DB_NAME = env('DB_NAME', default='alxtravel_db')  # Default database name if not set
+# DB_USER = env('DB_USER', default='root')  # Default database user if not set
+# DB_PASSWORD = env('DB_PASSWORD', default='yourpassword')  # Default database password if not set
+# DB_HOST = env('DB_HOST', default='localhost')  # Default database host if not set
+# DB_PORT = env('DB_PORT', default='3306')  # Default database port if not set     
+
+
 # MySQL Database Configuration
 DATABASES = {
     'default': {
@@ -191,4 +195,3 @@ DATABASES = {
         'PORT': env('DB_PORT', default='3306'),
     }
 }
-"""
