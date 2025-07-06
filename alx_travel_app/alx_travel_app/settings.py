@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework', 
     'corsheaders', 
     'drf_yasg',
-    'rabbitmq',
+    #'rabbitmq',
     'celery',
 ]
 
@@ -80,18 +80,18 @@ WSGI_APPLICATION = 'alx_travel_app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-"""
+
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
-        'NAME': BASE_DIR / 'alx_travel_db',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'alx_travel_db',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'DB_PASSWORD',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
-"""
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -177,9 +177,9 @@ environ.Env.read_env()  # reads the .env file
 
 # Database configuration using environment variables
 DEBUG = env('DEBUG') # Set to True for development, False for production
-SECRET_KEY = env('SECRET_KEY') # Ensure you set this in your .env file
+#SECRET_KEY = env('SECRET_KEY') # Ensure you set this in your .env file
 
-
+"""
 # MySQL Database Configuration
 DATABASES = {
     'default': {
@@ -191,3 +191,4 @@ DATABASES = {
         'PORT': env('DB_PORT', default='3306'),
     }
 }
+"""
